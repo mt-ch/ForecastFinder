@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
 var capitalize = require("lodash/capitalize");
 
@@ -13,10 +13,11 @@ function getCelsius(kelvins) {
 }
 
 export const WeatherCard = ({ weather }) => {
+
   return (
     <div class="container">
       <div class="row">
-        {weather.map(data => (
+        {weather.map((data) => (
           <div key={data.time} class="card m-3 w-25 ">
             <h5 class="card-header text-center">
               {moment(data.time).format("HH:mm")}

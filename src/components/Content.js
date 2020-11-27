@@ -1,55 +1,89 @@
-import React, { PureComponent } from "react";
-import GetWeather from './getWeather';
-import WeatherCard from './weatherCard';
+import React, { useState } from "react";
 import GetForecast from './getForecast';
+import WeatherCard from './weatherCard';
 
-export default class Content extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { 
-        value: "",
-        weather: []
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const Content = () => {
+  const [location, setLocation] = useState("");
+  const [weather, setWeather] = useState([]);
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-  handleSubmit(event) {
-    GetForecast(this.state.value)
-        .then(data => this.setState({weather: data}))
-  }
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    alert(`Submitting Name ${location}`);
+    GetForecast(location, setWeather);
+  };
 
-  render() {
-    const { weather } = this.state;
-    return (
-      <div>
-        <h3 class="font-weight-bolder pt-4 text-center">Search a forecast</h3>
-        <form onSubmit={this.handleSubmit}>
-          <div class="input-group p-3">
-            <input
-              type="text"
-              class="form-control" 
-              placeholder="Location"
-              value={this.state.value}
-              onChange={this.handleChange}
-            />{" "}
-            <button
-              class="btn btn-outline-secondary"
-              type="submit"
-              id="button-addon2"
-            >
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-            </svg>
-            </button>
-          </div>
-        </form>
-        <WeatherCard weather={weather}/>
-      </div>
-    );
-  }
-}
+  return (
+    <>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Location:
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
+    <WeatherCard weather={weather}/>
+    </>
+  );
+};
+
+export default Content;
+
+// import React, { PureComponent } from "react";
+// import GetWeather from './getWeather';
+// import WeatherCard from './weatherCard';
+// import GetForecast from './getForecast';
+
+// export default class Content extends PureComponent {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//         value: "",
+//         weather: []
+//     };
+//     this.handleChange = this.handleChange.bind(this);
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//   }
+
+//   handleChange(event) {
+//     this.setState({ value: event.target.value });
+//   }
+//   handleSubmit(event) {
+//     GetForecast(this.state.value)
+//         .then(data => this.setState({weather: data}))
+//   }
+
+//   render() {
+//     const { weather } = this.state;
+//     return (
+//       <div>
+//         <h3 class="font-weight-bolder pt-4 text-center">Search a forecast</h3>
+//         <form onSubmit={this.handleSubmit}>
+//           <div class="input-group p-3">
+//             <input
+//               type="text"
+//               class="form-control"
+//               placeholder="Location"
+//               value={this.state.value}
+//               onChange={this.handleChange}
+//             />{" "}
+//             <button
+//               class="btn btn-outline-secondary"
+//               type="submit"
+//               id="button-addon2"
+//             >
+//             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+//                 <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+//                 <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+//             </svg>
+//             </button>
+//           </div>
+//         </form>
+//         {/* <WeatherCard weather={weather}/> */}
+//       </div>
+//     );
+//   }
+// }
