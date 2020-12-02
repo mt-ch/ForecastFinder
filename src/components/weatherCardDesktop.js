@@ -20,7 +20,7 @@ function getCelsius(kelvins) {
   return Math.round(celsius);
 }
 
-export const WeatherCard = ({ weather, forecast }) => {
+export const WeatherCardDesktop = ({ weather, forecast }) => {
   const handleBack = (evt) => {
     back();
   };
@@ -35,36 +35,16 @@ export const WeatherCard = ({ weather, forecast }) => {
   };
 
   return (
-    <div class="weather-info">
-      {/* <div class="circle"></div>
-      <a className="back" onClick={handleBack}>
-        <Arrow width="3em" fill="#040403" />
-      </a> */}
-
-      {weather.map((data) => (
-        <>
-          <div class="" key={data.time}>
-            <div class="">
-              <h2 className="temp">{getCelsius(data.temp)}°</h2>
-              <i class={getIcon(data.iconId) + " bg-weather"}></i>
-              {/* <p class="pt-3">{data.description}</p> */}
-            </div>
-          </div>
-        </>
-      ))}
-
-      <div className="forecast-wrapper">
-        {forecast.slice(0, 5).map((data) => (
-          <div className="forecast">
-            <i class={getIcon(data.iconId) + " icon"}></i>
-            <p>{moment(data.time).format("ha")}</p>
-            {/* <p class="pb-1">{getCelsius(data.temp)}°</p> */}
-          </div>
+    <div class="weather-info-d">
+      <div class="weather-title">
+        <h1>Its hot.</h1>
+        {weather.map((data) => (
+          <h5 className="weather-city">{data.city}</h5>
         ))}
       </div>
 
-      {weather.map((data) => (
-        <>
+      <div className="bottom-info">
+        {weather.map((data) => (
           <div class="extra-info">
             <div class="info-item">
               <Sunrise width={"2em"} fill="black" />
@@ -83,10 +63,26 @@ export const WeatherCard = ({ weather, forecast }) => {
               <p>{data.humidity}%</p>
             </div>
           </div>
-        </>
-      ))}
+        ))}
+
+        <div class="bottom-container">
+          <div className="forecast-wrapper-d">
+            {forecast.slice(0, 5).map((data) => (
+              <div className="forecast-d">
+                <i class={getIcon(data.iconId) + " icon-d"}></i>
+                <p>{moment(data.time).format("h")}</p>
+              </div>
+            ))}
+          </div>
+          {weather.map((data) => (
+            <div key={data.time}>
+              <h2 className="temp-d">{getCelsius(data.temp)}°</h2>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default WeatherCard;
+export default WeatherCardDesktop;

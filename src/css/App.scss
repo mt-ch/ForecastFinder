@@ -1,0 +1,335 @@
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans&display=swap");
+
+$primary: #f3fb10;
+$secondary: #c0c891;
+$black: #040403;
+$white: #ececec;
+$grey: #a2abb2;
+$padding: clamp(1rem 10vw 10rem);
+$mobile: 575px;
+
+// Globals
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  outline: none;
+}
+
+html,
+body {
+  position: relative;
+  background-attachment: fixed;
+  scroll-behavior: smooth;
+  background: $grey;
+  color: $black;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  overflow: hidden;
+  font-family: "Public Sans", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  text-rendering: optimizeLegibility;
+  font-size: 100%;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+//Fonts
+
+h1 {
+  // font-size: 10vw;
+}
+h2 {
+  font-size: 8vw;
+}
+h3 {
+  font-size: 6vw;
+}
+p {
+  font-size: 2vw;
+  position: relative;
+  z-index: 5;
+  padding: 0;
+}
+
+// Content
+
+.content {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+
+  // Landing
+
+  .landing {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .landing-search {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+
+      .title-wrapper {
+        background-color: #f0f0f0;
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        align-items: end;
+
+        .title {
+          background-color: #f0f0f0;
+          width: 100%;
+          h1 {
+            text-align: center;
+          }
+        }
+      }
+
+      .location-input {
+        display: flex;
+        border: 1px solid black;
+        border-radius: 5em;
+        padding: 0.5em 1em 0.5em 1em;
+        margin: 1em clamp(1rem, 5vw, 5rem) 1em clamp(1rem, 5vw, 5rem);
+        input,
+        textarea {
+          border: none;
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          background: none;
+        }
+      }
+    }
+  }
+
+  .weather-info-d {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    position: relative;
+    padding-top: 3vh;
+    height: 100vh;
+    width: 100%;
+    
+    .weather-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      width: 100%;
+      h1 {
+        font-size: 15vw;
+      }
+      .weather-city {
+        border: 1px solid $black;
+        border-radius: 5em;
+        padding: 0.5em 1em 0.5em 1em;
+      }
+    }
+
+    .bottom-info{
+      width: 100%;
+
+      .bottom-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+  
+        .temp-d {
+          font-size: 20vw;
+        }
+  
+        .forecast-wrapper-d {
+          display: flex;
+          flex-direction: row;
+  
+          div.forecast-d {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 1vw 0 1vw;
+            width: 140%;
+            // height: 10%;
+            padding: 2vh 2vh 0vh 2vh;
+            border: 1px #040403 solid;
+            border-radius: 3em;
+            max-width: 80px;
+            p {
+              padding: 0;
+              padding-top: 4vh;
+            }
+  
+            .icon-d {
+              font-size: 5vw;
+            }
+          }
+        }
+      }
+    }
+    
+  }
+
+  // Weather Card
+
+  .weather {
+    position: relative;
+    z-index: 9;
+    height: 100%;
+    width: 100%;
+    padding: 2vh clamp(1rem, 5vw, 5rem) 2vh clamp(1rem, 5vw, 5rem);
+
+    .weather-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      // background-color: red;
+      height: 75vh;
+      .temp {
+        font-size: 40vw;
+      }
+
+      .bg-weather {
+        position: absolute;
+        top: 0;
+        opacity: 0.3;
+        font-size: 0vw;
+      }
+    }
+
+    .extra-info {
+      display: flex;
+
+      .info-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 2vw 0 2vw;
+
+        p {
+          margin-top: 1vh;
+        }
+      }
+    }
+  }
+}
+
+.bg {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(0.2em);
+  object-fit: cover;
+}
+
+.city {
+  text-transform: capitalize;
+}
+
+.back {
+  display: flex;
+  justify-content: end;
+  // width: 10vw;
+
+  svg {
+    transform: scaleX(-1);
+  }
+}
+
+.wi {
+  font-size: 30vw;
+}
+
+h1 {
+  letter-spacing: -0.1rem;
+  line-height: 1;
+}
+.line-wrap {
+  overflow: hidden;
+  height: 100%;
+}
+
+.icon {
+  font-size: 8vw;
+}
+
+.forecast-wrapper {
+  display: flex;
+  flex-direction: row;
+  // padding: 5vh 0 3vh 0;
+  // justify-content: center;
+
+  div.forecast {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0.5em 0 0.5em;
+    width: 100%;
+    // height: 10%;
+    padding: 1em 0.5em 0em 0.5em;
+    border: 1px #040403 solid;
+    border-radius: 3em;
+    max-width: 80px;
+    p {
+      padding: 0;
+      padding-top: 4vh;
+    }
+  }
+
+  // div.forecast:last-child {
+  //   border: 0;
+  // }
+}
+
+.city-name-wrapper {
+  display: flex;
+  justify-content: center;
+  .city-name {
+    padding: 0.5em 1em 0.5em 1em;
+    border: 1px solid black;
+    border-radius: 2em;
+  }
+}
+
+.circle {
+  position: absolute;
+  top: 0;
+  // left: 0;
+  right: -25vw;
+  bottom: 0;
+  margin: auto;
+  z-index: -2;
+  content: "";
+  width: 70vh;
+  height: 70vh;
+  border-radius: 20em;
+  background-color: #f3fb10;
+  filter: blur(1.5em);
+}
