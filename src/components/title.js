@@ -12,13 +12,13 @@ const Title = ({ title }) => {
   }, [line1]);
   return (
     <>
-      <h1>
+      <h2>
         <div className="line-wrap">
           <div ref={(el) => (line1 = el)} className="line">
             {title}
           </div>
         </div>
-      </h1>
+      </h2>
     </>
   );
 };

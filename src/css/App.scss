@@ -55,19 +55,11 @@ svg {
 //Fonts
 
 h1 {
-  // font-size: 10vw;
+  font-size: clamp(7rem, 18vw, 15rem);
 }
-h2 {
-  font-size: 8vw;
-}
-h3 {
-  font-size: 6vw;
-}
+
 p {
-  font-size: 2vw;
-  position: relative;
-  z-index: 5;
-  padding: 0;
+  font-size: clamp(1rem, 2vw, 2rem);
 }
 
 // Content
@@ -130,7 +122,7 @@ p {
     justify-content: space-between;
     align-items: start;
     position: relative;
-    padding-top: 3vh;
+    padding: 5vh 0 5vh 0;
     height: 100vh;
     width: 100%;
     
@@ -139,13 +131,30 @@ p {
       justify-content: space-between;
       align-items: start;
       width: 100%;
-      h1 {
-        font-size: 15vw;
-      }
       .weather-city {
         border: 1px solid $black;
         border-radius: 5em;
         padding: 0.5em 1em 0.5em 1em;
+
+        &:hover{
+          background-color: $black;
+          color: $white;
+        }
+      }
+
+      .location-input {
+        display: flex;
+        border: 1px solid black;
+        border-radius: 5em;
+        padding: 1em;
+        input,
+        textarea {
+          border: none;
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          background: none;
+        }
       }
     }
 
@@ -172,20 +181,26 @@ p {
             align-items: center;
             justify-content: space-between;
             margin: 0 1vw 0 1vw;
-            width: 140%;
-            // height: 10%;
+            width: 100%;
+            height: 100%;
             padding: 2vh 2vh 0vh 2vh;
             border: 1px #040403 solid;
             border-radius: 3em;
-            max-width: 80px;
+            min-height: 15vh;
+            max-width: 100px;
             p {
               padding: 0;
               padding-top: 4vh;
             }
   
             .icon-d {
-              font-size: 5vw;
+              font-size: clamp(2rem, 3.5vw, 3.5rem);
             }
+          }
+
+          div.forecast-d:nth-child(1){
+            background-color: $black;
+            color: $white;
           }
         }
       }
@@ -332,4 +347,21 @@ h1 {
   border-radius: 20em;
   background-color: #f3fb10;
   filter: blur(1.5em);
+}
+
+.circle-d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -120vh;
+  margin: auto;
+  z-index: -2;
+  content: "";
+  width: 90%;
+  height: 90%;
+  border-radius: 100%;
+  background-color: $primary;
+  filter: blur(1.75em);
+  opacity: .5;
 }

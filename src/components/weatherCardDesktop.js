@@ -37,14 +37,26 @@ export const WeatherCardDesktop = ({ weather, forecast }) => {
   return (
     <div class="weather-info-d">
       <div class="weather-title">
-        <h1>Its hot.</h1>
+        <h1>It's hot.</h1>
         {weather.map((data) => (
-          <h5 className="weather-city">{data.city}</h5>
+          // <p className="weather-city">{data.city}</p>
+          <div className="location-input" onSubmit={handleSubmit}>
+            <input
+              value={data.city}
+              placeholder={"Search for a place"}
+              // onChange={(e) => setLocation(e.target.value)}
+            />
+            <div>
+              <a type="submit" value="Submit" onClick={handleSubmit}>
+                <Search className="search-icon" height="2.5vh" />
+              </a>
+            </div>
+          </div>
         ))}
       </div>
 
       <div className="bottom-info">
-        {weather.map((data) => (
+        {/* {weather.map((data) => (
           <div class="extra-info">
             <div class="info-item">
               <Sunrise width={"2em"} fill="black" />
@@ -63,20 +75,20 @@ export const WeatherCardDesktop = ({ weather, forecast }) => {
               <p>{data.humidity}%</p>
             </div>
           </div>
-        ))}
+        ))} */}
 
         <div class="bottom-container">
           <div className="forecast-wrapper-d">
             {forecast.slice(0, 5).map((data) => (
               <div className="forecast-d">
                 <i class={getIcon(data.iconId) + " icon-d"}></i>
-                <p>{moment(data.time).format("h")}</p>
+                <p>{moment(data.time).format("ha")}</p>
               </div>
             ))}
           </div>
           {weather.map((data) => (
             <div key={data.time}>
-              <h2 className="temp-d">{getCelsius(data.temp)}°</h2>
+              <h1>{getCelsius(data.temp)}°</h1>
             </div>
           ))}
         </div>

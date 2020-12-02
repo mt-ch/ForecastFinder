@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import GetForecast from "../utils/getForecast";
 import GetWeather from "../utils/getWeather";
 import WeatherCard from "./weatherCard";
-import WeatherCardDesktop from './weatherCardDesktop';
+import WeatherCardDesktop from "./weatherCardDesktop";
 import Landing from "./landing";
 
 const Content = () => {
@@ -19,22 +19,30 @@ const Content = () => {
 
   return (
     <>
-    {/* <img class='bg' src='https://source.unsplash.com/collection/28675699'/> */}
-    <div className='content'>
-      <div class="landing" >
-        <Landing
-          location={location}
-          setLocation={setLocation}
-          hasError={hasError}
-          handleSubmit={handleSubmit}
-        />
-      </div>
+      {/* <img class='bg' src='https://source.unsplash.com/collection/28675699'/> */}
+      <div className="content">
+        <div class="landing">
+          <Landing
+            location={location}
+            setLocation={setLocation}
+            hasError={hasError}
+            handleSubmit={handleSubmit}
+          />
+        </div>
         {hasError ? null : (
           <div class="weather">
-            <WeatherCardDesktop weather={weather} forecast={forecast} />
+            <div class="circle-d"></div>
+            <WeatherCardDesktop
+              weather={weather}
+              forecast={forecast}
+              location={location}
+              setLocation={setLocation}
+              hasError={hasError}
+              handleSubmit={handleSubmit}
+            />
           </div>
         )}
-    </div>
+      </div>
     </>
   );
 };
