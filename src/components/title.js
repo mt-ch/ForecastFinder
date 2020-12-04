@@ -15,7 +15,7 @@ const Title = ({ title }) => {
       <h2>
         <div className="line-wrap">
           <div ref={(el) => (line1 = el)} className="line">
-            {title}
+            <strong>{title}</strong>
           </div>
         </div>
       </h2>

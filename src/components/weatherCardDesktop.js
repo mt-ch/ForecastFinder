@@ -7,6 +7,39 @@ import Sunset from "../icons/sunset";
 import Sunrise from "../icons/sunrise";
 import Arrow from "../icons/arrow";
 import Title from "./title";
+import Search from "../icons/search";
+import Menu from "./menu";
+
+import styled from "styled-components";
+
+const StyledMenu = styled.div`
+  position: relative;
+  z-index: 10;
+  padding: 0.5em 1em 0.5em 1em;
+  color: black;
+  background-color: ${({ open }) => (open ? "black" : "")};
+  border-radius: 1.8em;
+  border: 1px solid black;
+  z-index: -1;
+  color: #fff;
+  z-index: 2;
+  width: ${({ open }) => (open ? "350px" : "160px")};
+  height: ${({ open }) => (open ? "200px" : "60px")};
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    color: black;
+  }
+  &:hover {
+    background-color: black;
+    p {
+      color: white;
+    }
+  }
+`;
 
 gsap.registerPlugin(CSSPlugin);
 
@@ -20,7 +53,16 @@ function getCelsius(kelvins) {
   return Math.round(celsius);
 }
 
-export const WeatherCardDesktop = ({ weather, forecast }) => {
+export const WeatherCardDesktop = ({
+  weather,
+  forecast,
+  location,
+  setLocation,
+  hasError,
+  handleSubmit,
+}) => {
+  const [open, setOpen] = useState(false);
+
   const handleBack = (evt) => {
     back();
   };
@@ -37,45 +79,31 @@ export const WeatherCardDesktop = ({ weather, forecast }) => {
   return (
     <div class="weather-info-d">
       <div class="weather-title">
-        <h1>It's hot.</h1>
-        {weather.map((data) => (
-          // <p className="weather-city">{data.city}</p>
-          <div className="location-input" onSubmit={handleSubmit}>
-            <input
-              value={data.city}
-              placeholder={"Search for a place"}
-              // onChange={(e) => setLocation(e.target.value)}
-            />
-            <div>
-              <a type="submit" value="Submit" onClick={handleSubmit}>
-                <Search className="search-icon" height="2.5vh" />
+      {weather.map((data) => (
+          <>
+            {getCelsius(data.temp) > 15 ? (<h1>It's hot.</h1>) : (<h1>It's cold.</h1>)}
+            <StyledMenu open={open}>
+              <a onClick={() => setOpen(!open)}>
+                <p>{data.city}</p>
               </a>
-            </div>
-          </div>
+            </StyledMenu>
+          </>
         ))}
       </div>
 
       <div className="bottom-info">
-        {/* {weather.map((data) => (
+        {weather.map((data) => (
           <div class="extra-info">
             <div class="info-item">
-              <Sunrise width={"2em"} fill="black" />
+              <Sunrise width={"2.25em"} fill="black" />
               <p class="sunrise">{moment(data.sunrise).format("HH:mm")}</p>
             </div>
             <div class="info-item">
-              <Sunset width={"2em"} fill="black" />
+              <Sunset width={"2.25em"} fill="black" />
               <p>{moment(data.sunset).format("HH:mm")}</p>
             </div>
-            <div class="info-item">
-              <Wind width={"2em"} fill="black" />
-              <p>{data.windSpeed} mph</p>
-            </div>
-            <div class="info-item">
-              <Humidity width={"2em"} fill="black" />
-              <p>{data.humidity}%</p>
-            </div>
           </div>
-        ))} */}
+        ))}
 
         <div class="bottom-container">
           <div className="forecast-wrapper-d">

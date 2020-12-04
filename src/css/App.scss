@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Public+Sans&display=swap");
 
-$primary: #f3fb10;
+$primary: #fbd810;
 $secondary: #c0c891;
 $black: #040403;
 $white: #ececec;
-$grey: #a2abb2;
-$padding: clamp(1rem 10vw 10rem);
+$grey: #d6d8da;
+$blue: #57b0f3;
+$padding: clamp(1rem, 7vw, 10rem);
 $mobile: 575px;
 
 // Globals
@@ -45,6 +46,7 @@ body {
 
 a {
   text-decoration: none;
+  color: $black;
   cursor: pointer;
 }
 
@@ -55,11 +57,12 @@ svg {
 //Fonts
 
 h1 {
-  font-size: clamp(7rem, 18vw, 15rem);
+  font-size: clamp(7rem, 15vw, 12rem);
 }
 
 p {
   font-size: clamp(1rem, 2vw, 2rem);
+  margin: 0;
 }
 
 // Content
@@ -75,35 +78,47 @@ p {
     position: relative;
     width: 100%;
     height: 100%;
+    padding: 3vh $padding 0 $padding;
 
     .landing-search {
+      position: relative;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: start;
-      align-items: center;
+      justify-content: center;
 
-      .title-wrapper {
-        background-color: #f0f0f0;
+      .underline {
+        content: "";
         width: 100%;
-        height: 50vh;
-        display: flex;
-        align-items: end;
+        height: 2px;
+        background-color: #040403;
+      }
 
-        .title {
-          background-color: #f0f0f0;
-          width: 100%;
-          h1 {
-            text-align: center;
+      .suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 2vh;
+        
+        .suggestion {
+          padding: 1vh;
+          margin: 0 1vh 1vh 0;
+          border: 1px solid $black;
+          transition: all 0.2s ease;
+          overflow: hidden;
+
+          &:hover {
+            background-color: $black;
+            color: $white;
+            transition: all 0.2s ease;
           }
         }
       }
 
       .location-input {
         display: flex;
-        border: 1px solid black;
         border-radius: 5em;
-        padding: 0.5em 1em 0.5em 1em;
-        margin: 1em clamp(1rem, 5vw, 5rem) 1em clamp(1rem, 5vw, 5rem);
+
         input,
         textarea {
           border: none;
@@ -111,6 +126,7 @@ p {
           margin: 0;
           width: 100%;
           background: none;
+          padding: 1vh 0 1vh 0;
         }
       }
     }
@@ -122,43 +138,21 @@ p {
     justify-content: space-between;
     align-items: start;
     position: relative;
-    padding: 5vh 0 5vh 0;
+    z-index: 10;
+    padding: 6vh 0 6vh 0;
     height: 100vh;
     width: 100%;
-    
+
     .weather-title {
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: start;
+      z-index: 10;
       width: 100%;
-      .weather-city {
-        border: 1px solid $black;
-        border-radius: 5em;
-        padding: 0.5em 1em 0.5em 1em;
-
-        &:hover{
-          background-color: $black;
-          color: $white;
-        }
-      }
-
-      .location-input {
-        display: flex;
-        border: 1px solid black;
-        border-radius: 5em;
-        padding: 1em;
-        input,
-        textarea {
-          border: none;
-          padding: 0;
-          margin: 0;
-          width: 100%;
-          background: none;
-        }
-      }
     }
 
-    .bottom-info{
+    .bottom-info {
       width: 100%;
 
       .bottom-container {
@@ -166,46 +160,47 @@ p {
         justify-content: space-between;
         width: 100%;
         align-items: center;
-  
+
         .temp-d {
           font-size: 20vw;
         }
-  
+
         .forecast-wrapper-d {
           display: flex;
           flex-direction: row;
-  
+
           div.forecast-d {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
             margin: 0 1vw 0 1vw;
-            width: 100%;
+            width: 7vw;
             height: 100%;
-            padding: 2vh 2vh 0vh 2vh;
+            padding: 2vh;
             border: 1px #040403 solid;
             border-radius: 3em;
             min-height: 15vh;
-            max-width: 100px;
+            min-width: 70px;
+            max-width: 200px;
+
             p {
               padding: 0;
               padding-top: 4vh;
             }
-  
+
             .icon-d {
               font-size: clamp(2rem, 3.5vw, 3.5rem);
             }
           }
 
-          div.forecast-d:nth-child(1){
+          div.forecast-d:nth-child(1) {
             background-color: $black;
             color: $white;
           }
         }
       }
     }
-    
   }
 
   // Weather Card
@@ -223,10 +218,27 @@ p {
       justify-content: space-between;
       align-items: center;
       position: relative;
-      // background-color: red;
-      height: 75vh;
+      z-index: 10;
+      padding: 5vh 0 5vh 0;
+      height: 100%;
+      width: 100%;
+
+      .weather-header-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .weather-header {
+          padding: 0.5em 1em 0.5em 1em;
+          color: black;
+          border-radius: 1.8em;
+          border: 1px solid black;
+          z-index: 2;
+        }
+      }
+
       .temp {
-        font-size: 40vw;
+        font-size: 45vw;
+        margin-top: 5vh;
       }
 
       .bg-weather {
@@ -235,32 +247,56 @@ p {
         opacity: 0.3;
         font-size: 0vw;
       }
+
+      .forecast-wrapper {
+        display: flex;
+        flex-direction: row;
+
+        div.forecast {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          margin: 0 1vw 0 1vw;
+          width: 100%;
+          height: 100%;
+          padding: 2vh;
+          border: 1px #040403 solid;
+          border-radius: 3em;
+          min-height: 15vh;
+          max-width: 100px;
+          p {
+            padding-top: 4vh;
+          }
+
+          .icon {
+            font-size: clamp(2rem, 3.5vw, 3.5rem);
+          }
+        }
+
+        div.forecast:nth-child(1) {
+          background-color: $black;
+          color: $white;
+        }
+      }
     }
 
     .extra-info {
       display: flex;
+      flex-direction: column;
+      margin: 5vh 0 2vh 0;
 
       .info-item {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        margin: 0 2vw 0 2vw;
+        margin: 2vh 5vw 2vh 0;
 
         p {
-          margin-top: 1vh;
+          margin-left: 2vw;
         }
       }
     }
   }
-}
-
-.bg {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  filter: blur(0.2em);
-  object-fit: cover;
 }
 
 .city {
@@ -270,15 +306,10 @@ p {
 .back {
   display: flex;
   justify-content: end;
-  // width: 10vw;
 
   svg {
     transform: scaleX(-1);
   }
-}
-
-.wi {
-  font-size: 30vw;
 }
 
 h1 {
@@ -287,40 +318,7 @@ h1 {
 }
 .line-wrap {
   overflow: hidden;
-  height: 100%;
-}
-
-.icon {
-  font-size: 8vw;
-}
-
-.forecast-wrapper {
-  display: flex;
-  flex-direction: row;
-  // padding: 5vh 0 3vh 0;
-  // justify-content: center;
-
-  div.forecast {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 0.5em 0 0.5em;
-    width: 100%;
-    // height: 10%;
-    padding: 1em 0.5em 0em 0.5em;
-    border: 1px #040403 solid;
-    border-radius: 3em;
-    max-width: 80px;
-    p {
-      padding: 0;
-      padding-top: 4vh;
-    }
-  }
-
-  // div.forecast:last-child {
-  //   border: 0;
-  // }
+  // height: 100%;
 }
 
 .city-name-wrapper {
@@ -336,17 +334,17 @@ h1 {
 .circle {
   position: absolute;
   top: 0;
-  // left: 0;
-  right: -25vw;
+  right: -50vw;
   bottom: 0;
   margin: auto;
   z-index: -2;
   content: "";
-  width: 70vh;
-  height: 70vh;
-  border-radius: 20em;
-  background-color: #f3fb10;
-  filter: blur(1.5em);
+  width: 100%;
+  height: 80%;
+  border-radius: 100%;
+  background-color: $primary;
+  filter: blur(1.75em);
+  opacity: 0.7;
 }
 
 .circle-d {
@@ -361,7 +359,7 @@ h1 {
   width: 90%;
   height: 90%;
   border-radius: 100%;
-  background-color: $primary;
+  // background-color: $primary;
   filter: blur(1.75em);
-  opacity: .5;
+  opacity: 0.7;
 }

@@ -10,9 +10,7 @@ export default async function GetForecast(location, setForecast) {
     const response = await fetch(url);
     const data = await response.json();
     const {
-      cnt: count,
       list,
-      city: { name: name, timezone: timeZ, sunrise: sunR, sunset: sunS },
     } = data;
 
 

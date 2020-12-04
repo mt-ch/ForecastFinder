@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import moment from "moment";
 import { TimelineLite, gsap, CSSPlugin, Expo } from "gsap";
-import Humidity from "../icons/humidity";
-import Wind from "../icons/wind";
 import Sunset from "../icons/sunset";
 import Sunrise from "../icons/sunrise";
 import Arrow from "../icons/arrow";
-import Title from "./title";
 
 gsap.registerPlugin(CSSPlugin);
 
@@ -35,20 +32,19 @@ export const WeatherCard = ({ weather, forecast }) => {
   };
 
   return (
-    <div class="weather-info">
-      {/* <div class="circle"></div>
+    <div className="weather-info">
       <a className="back" onClick={handleBack}>
         <Arrow width="3em" fill="#040403" />
       </a> */}
 
       {weather.map((data) => (
         <>
-          <div class="" key={data.time}>
-            <div class="">
-              <h2 className="temp">{getCelsius(data.temp)}°</h2>
-              <i class={getIcon(data.iconId) + " bg-weather"}></i>
-              {/* <p class="pt-3">{data.description}</p> */}
+          <div className="" key={data.time}>
+            <div className='weather-header-wrapper'>
+              <p className="weather-header">{data.city}</p>
             </div>
+            <h2 className="temp">{getCelsius(data.temp)}°</h2>
+            <i className={getIcon(data.iconId) + " bg-weather"}></i>
           </div>
         </>
       ))}
@@ -56,31 +52,22 @@ export const WeatherCard = ({ weather, forecast }) => {
       <div className="forecast-wrapper">
         {forecast.slice(0, 5).map((data) => (
           <div className="forecast">
-            <i class={getIcon(data.iconId) + " icon"}></i>
+            <i className={getIcon(data.iconId) + " icon"}></i>
             <p>{moment(data.time).format("ha")}</p>
-            {/* <p class="pb-1">{getCelsius(data.temp)}°</p> */}
           </div>
         ))}
       </div>
 
       {weather.map((data) => (
         <>
-          <div class="extra-info">
-            <div class="info-item">
+          <div className="extra-info">
+            <div className="info-item">
               <Sunrise width={"2em"} fill="black" />
-              <p class="sunrise">{moment(data.sunrise).format("HH:mm")}</p>
+              <p className="sunrise">{moment(data.sunrise).format("HH:mm")}</p>
             </div>
-            <div class="info-item">
+            <div className="info-item">
               <Sunset width={"2em"} fill="black" />
               <p>{moment(data.sunset).format("HH:mm")}</p>
-            </div>
-            <div class="info-item">
-              <Wind width={"2em"} fill="black" />
-              <p>{data.windSpeed} mph</p>
-            </div>
-            <div class="info-item">
-              <Humidity width={"2em"} fill="black" />
-              <p>{data.humidity}%</p>
             </div>
           </div>
         </>
