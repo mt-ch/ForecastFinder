@@ -4,6 +4,7 @@ import GetWeather from "../utils/getWeather";
 import WeatherCard from "./weatherCard";
 import WeatherCardDesktop from "./weatherCardDesktop";
 import Landing from "./landing";
+import styled from "styled-components";
 
 const useViewport = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -29,7 +30,7 @@ const Content = () => {
   const [hasError, setHasError] = useState(false);
 
   const { width } = useViewport();
-  const breakpoint = 620;
+  const breakpoint = 700;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -39,28 +40,24 @@ const Content = () => {
 
   const handleAutoSubmit = (evt, input) => {
     evt.preventDefault();
-    setLocation(input);
-    GetWeather(location, setWeather, setHasError);
-    GetForecast(location, setForecast);
+    GetWeather(input, setWeather, setHasError);
+    GetForecast(input, setForecast);
   };
 
   return (
     <>
       <div className="content">
-        <div className="landing">
-          <Landing
-            location={location}
-            setLocation={setLocation}
-            hasError={hasError}
-            handleSubmit={handleSubmit}
-            handleAutoSubmit={handleAutoSubmit}
-          />
-        </div>
+        <Landing
+          location={location}
+          setLocation={setLocation}
+          hasError={hasError}
+          handleSubmit={handleSubmit}
+          handleAutoSubmit={handleAutoSubmit}
+        />
         {hasError ? null : (
           <div className="weather">
             {width < breakpoint ? (
               <>
-                <div className="circle"></div>
                 <WeatherCard
                   weather={weather}
                   forecast={forecast}
@@ -69,21 +66,6 @@ const Content = () => {
               </>
             ) : (
               <>
-                {weather.map((data) => (
-                  <>
-                    {getCelsius(data.temp) > 15 ? (
-                      <div
-                        className="circle-d"
-                        style={{ backgroundColor: "#fbd810" }}
-                      ></div>
-                    ) : (
-                      <div
-                        className="circle-d"
-                        style={{ backgroundColor: "#57b0f3" }}
-                      ></div>
-                    )}
-                  </>
-                ))}
                 <WeatherCardDesktop
                   weather={weather}
                   forecast={forecast}

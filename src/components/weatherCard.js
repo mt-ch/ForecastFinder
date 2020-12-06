@@ -1,78 +1,85 @@
 import React from "react";
-import moment from "moment";
-import { TimelineLite, gsap, CSSPlugin, Expo } from "gsap";
-import Sunset from "../icons/sunset";
-import Sunrise from "../icons/sunrise";
-import Arrow from "../icons/arrow";
+import { StyledWeatherMobile, StyledCircle } from "../css/components.styled";
+import BackButton from "./backButton";
+import Forecast from "./forecast";
+import DayTime from "./daytime";
+import { useEffect } from "react";
+import { TimelineLite, Expo } from "gsap";
 
-gsap.registerPlugin(CSSPlugin);
-
-function getIcon(id) {
-  var icon = "wi wi-owm-" + id;
-  return icon;
-}
 
 function getCelsius(kelvins) {
   var celsius = kelvins - 273.15;
   return Math.round(celsius);
 }
 
-export const WeatherCard = ({ weather, forecast }) => {
-  const handleBack = (evt) => {
-    back();
-  };
+export const WeatherCard = ({ weather, forecast, setDisplay }) => {
+  useEffect(() => {
+    reveal();
+    return () => {};
+  }, []);
 
-  const back = () => {
+  const reveal = () => {
     const t1 = new TimelineLite();
-    t1.to(".weather", {
-      x: "100%",
-      duration: 0.3,
+    t1.from(".temp", {
+      delay: 1,
+      opacity: 0,
+      y: "6vh",
+      duration: 0.4,
       ease: Expo.easeInOut,
-    }).to(".landing", { x: "0%", duration: 0.3, ease: Expo.easeInOut });
+    })
+      .from(".city-header, .back-button", {
+        opacity: 0,
+        y: "3vh",
+        duration: 0.4,
+        ease: Expo.easeInOut,
+      })
+      .from(".circle", {
+        x: "70vw",
+        duration: 0.8,
+        ease: Expo.easeInOut,
+      });
   };
 
   return (
-    <div className="weather-info">
-      <a className="back" onClick={handleBack}>
-        <Arrow width="3em" fill="#040403" />
-      </a> */}
-
+    <>
       {weather.map((data) => (
         <>
-          <div className="" key={data.time}>
-            <div className='weather-header-wrapper'>
-              <p className="weather-header">{data.city}</p>
+          {getCelsius(data.temp) >= 15 ? (
+            <StyledCircle
+              className="circle"
+              color={"#fbd810"}
+              right={"-40vw"}
+              bottom={0}
+            ></StyledCircle>
+          ) : (
+            <StyledCircle
+              className="circle"
+              color={"#57b0f3"}
+              right={"-40vw"}
+              bottom={0}
+            ></StyledCircle>
+          )}
+        </>
+      ))}
+      <StyledWeatherMobile className="weather-info">
+        {weather.map((data) => (
+          <div key={data.time}>
+            <div className="weather-header-wrapper">
+              <p className="city-header">{data.city}</p>
+              <div className="back-button">
+                <BackButton setDisplay={setDisplay} />
+              </div>
             </div>
             <h2 className="temp">{getCelsius(data.temp)}°</h2>
-            <i className={getIcon(data.iconId) + " bg-weather"}></i>
-          </div>
-        </>
-      ))}
-
-      <div className="forecast-wrapper">
-        {forecast.slice(0, 5).map((data) => (
-          <div className="forecast">
-            <i className={getIcon(data.iconId) + " icon"}></i>
-            <p>{moment(data.time).format("ha")}</p>
           </div>
         ))}
-      </div>
 
-      {weather.map((data) => (
-        <>
-          <div className="extra-info">
-            <div className="info-item">
-              <Sunrise width={"2em"} fill="black" />
-              <p className="sunrise">{moment(data.sunrise).format("HH:mm")}</p>
-            </div>
-            <div className="info-item">
-              <Sunset width={"2em"} fill="black" />
-              <p>{moment(data.sunset).format("HH:mm")}</p>
-            </div>
-          </div>
-        </>
-      ))}
-    </div>
+        <div className="weather-bottom">
+          <Forecast forecast={forecast} />
+          <DayTime weather={weather} />
+        </div>
+      </StyledWeatherMobile>
+    </>
   );
 };
 

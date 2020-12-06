@@ -1,7 +1,31 @@
 import CreateWeatherData from "./createWeatherData";
-import { TimelineLite, gsap, CSSPlugin, Expo } from "gsap";
+import { TimelineLite, Expo } from "gsap";
 
-export default async function getWeather(location, setWeather, setHasError) {
+export default async function getWeather(location, setWeather, setHasError, setDisplay) {
+  const reveal = () => {
+    const t1 = new TimelineLite()
+    t1
+    .fromTo(
+      ".landing",
+      {
+        y: '0',
+      },{
+        y: '-200vh',
+        duration: 0.3,
+        ease: Expo.easeInOut,
+      })
+    .fromTo('.weather', {
+      y: '100vh',
+    },
+    {
+      y: '-100vh',
+      duration: 0.3,
+      ease: Expo.easeInOut,
+    })
+  };
+  
+
+  
   try {
     setHasError(false);
     var cityWeather = [];
@@ -11,14 +35,21 @@ export default async function getWeather(location, setWeather, setHasError) {
       "&appid=7de0445d2dc48c73e429027355084626";
     const response = await fetch(url);
     const data = await response.json();
+
+    // De-structure and push data into new array
     const {
       weather: [array],
       main: { temp: temp, feels_like: feelsLike, humidity: humidity },
       wind: { speed: spe },
+      dt: dt,
       sys: { sunrise: sunR, sunset: sunS },
       name: name,
       timezone: time,
     } = data;
+
+    // Calculate times for local timezones
+    let sunRise = new Date(1000*time+(sunR*1000));
+    let sunSet = new Date(1000*time+(sunS*1000));
 
     const { main: type, description: desc, id: iconId } = array;
 
@@ -33,37 +64,14 @@ export default async function getWeather(location, setWeather, setHasError) {
         feelsLike,
         humidity,
         spe,
-        sunR,
-        sunS
+        sunRise,
+        sunSet
       )
     );
     setWeather(cityWeather);
+    setDisplay(true);
     return reveal();
   } catch (er) {
     return setHasError(true);
   }
 }
-
-const reveal = () => {
-  const t1 = new TimelineLite()
-  t1
-  // .to(
-  //   ".landing-search",
-  //   {
-  //     y: '-40vh',
-  //     duration: 0.3,
-  //     ease: Expo.easeInOut,
-  //   })
-  .to(
-    ".landing-search",
-    {
-      y: '-100vh',
-      duration: 0.3,
-      ease: Expo.easeInOut,
-    })
-  .to('.weather', {
-    y: '-100vh',
-      duration: 0.3,
-      ease: Expo.easeInOut,
-  })
-};

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import Search from "../icons/search";
-import Title from "./title";
-import { gsap } from "gsap";
+import { TimelineLite, Expo } from "gsap";
+import { StyledLanding } from "../css/components.styled";
 
 const cities = [
   { name: "Paris" },
   { name: "London" },
   { name: "Berlin" },
-  { name: "Barcalona" },
+  { name: "Barcelona" },
   { name: "Madrid" },
   { name: "Lisbon" },
   { name: "Lyon" },
@@ -42,36 +42,52 @@ const Landing = ({
   handleAutoSubmit,
 }) => {
   useEffect(() => {
-    gsap.from(".underline", {
-      duration: 1,
-      delay: 0.5,
-      width: "0%",
-    });
-
-    gsap.from(".search-header", {
-      duration: 0.5,
-      delay: 0.8,
-      y: "25vw",
-    });
-    gsap.from(".location-input", {
-      duration: 0.3,
-      delay: 1.5,
-      y: "1vh",
-      opacity: 0,
-    });
-    gsap.from(".suggestion", {
-      duration: 0.1,
-      delay: 1.8,
-      y: "10vh",
-      opacity: 0,
-      stagger: {
-        amount: 1.2,
-      },
-    });
+    reveal();
   }, []);
+
+  const reveal = () => {
+    const t1 = new TimelineLite();
+    t1.from(".title", {
+      duration: 0.5,
+      delay: 0.3,
+      y: "25vw",
+      ease: Expo.easeInOut,
+    })
+      .from(".underline", {
+        duration: 0.5,
+        delay: 0,
+        width: "0%",
+        ease: Expo.easeInOut,
+      })
+      .from(".search-header", {
+        duration: 0.5,
+        delay: 0,
+        y: "25vw",
+        ease: Expo.easeInOut,
+      })
+      .from(".location-input", {
+        duration: 0.5,
+        delay: 0,
+        y: "1vh",
+        opacity: 0,
+        ease: Expo.easeInOut,
+      })
+      .from(".suggestion", {
+        duration: 0.1,
+        delay: 0,
+        ease: Expo.easeInOut,
+        y: "10vh",
+        opacity: 0,
+        stagger: {
+          amount: 1,
+        },
+      });
+  };
   return (
-    <>
-      <Title title={"Forecast Finder"} />
+    <StyledLanding className="landing">
+      <div className="line-wrap">
+        <h2 className="title"><strong>Forecast Finder</strong></h2>
+      </div>
       <div className="landing-search">
         <div className="line-wrap">
           <h5 className="search-header">Search for a place.</h5>
@@ -93,7 +109,7 @@ const Landing = ({
             <div className="underline" style={{ backgroundColor: "red" }}></div>
           </div>
         ) : (
-            <div className="underline"></div>
+          <div className="underline"></div>
         )}
         <div className="suggestions">
           {cities.map((city) => (
@@ -109,7 +125,7 @@ const Landing = ({
           ))}
         </div>
       </div>
-    </>
+    </StyledLanding>
   );
 };
 

@@ -13,7 +13,7 @@ export default async function GetForecast(location, setForecast) {
       list,
     } = data;
 
-
+    // De-structure and push data into new array
     for (const {
       weather: [array],
       main: { temp: temp, feels_like: feelsLike, humidity: humidity },
@@ -35,9 +35,9 @@ export default async function GetForecast(location, setForecast) {
       );
     }
 
+    // Sort array for todays forecast
     var startDate = new Date();
     var endDate = new Date(Date.now() + ( 3600 * 1000 * 24));
-
 
     var filteredWeather = cityWeather.filter((a) => {
       var date = new Date(a.time);
