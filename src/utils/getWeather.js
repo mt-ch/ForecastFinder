@@ -50,13 +50,14 @@ export default async function getWeather(location, setWeather, setHasError, setD
     // Calculate times for local timezones
     let sunRise = new Date(1000*time+(sunR*1000));
     let sunSet = new Date(1000*time+(sunS*1000));
-
+    let today = Date.now();
+    let date = new Date(1000*time+(today));
     const { main: type, description: desc, id: iconId } = array;
 
     cityWeather.push(
       CreateWeatherData(
         name,
-        time,
+        date,
         type,
         desc,
         iconId,

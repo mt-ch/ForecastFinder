@@ -11,7 +11,7 @@ function getIcon(id) {
 
 const Forecast = ({forecast}) => {
   useEffect(() => {
-    reveal();
+    // reveal();
     return () => {};
   }, []);
 

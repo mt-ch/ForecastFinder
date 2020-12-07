@@ -20,7 +20,7 @@ export const StyledCircle = styled.div`
   opacity: 1;
   animation: sunrise 1s infinite linear forwards, rays 1s 1s infinite linear;
 
-  @media (min-width: 700px) {
+  @media (min-width: 550px) {
     left: 0;
   }
 
@@ -49,10 +49,10 @@ export const StyledCircle = styled.div`
 `;
 
 export const StyledLanding = styled.div`
-  position: relative;
+  top: 0;
   width: 100%;
   height: 100%;
-  padding: 5vh ${({ theme }) => theme.padding} 0 ${({ theme }) => theme.padding};
+  padding: 6vh ${({ theme }) => theme.padding} 0 ${({ theme }) => theme.padding};
 
   .landing-search {
     position: relative;
@@ -109,7 +109,7 @@ export const StyledLanding = styled.div`
 export const StyledWeatherMobile = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   position: relative;
   z-index: 10;
@@ -122,28 +122,34 @@ export const StyledWeatherMobile = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 100vw;
+    /* width: 100vw; */
 
-    .city-header {
-      display: flex;
-      align-items: center;
-      padding: 0.5em 1em 0.5em 1em;
+    .weather-main-info {
       border-radius: 1.8em;
-      border: 1px solid ${({ theme }) => theme.black};
-      z-index: 2;
-    }
+      background-color: ${({ theme }) => theme.black};
+      padding: 1.5em;
+      color: ${({ theme }) => theme.white};
+      .top {
+        display: flex;
+        justify-content: space-between;
 
-    .back-button{
-      position: absolute;
-      right: 0;
-      padding-right: ${({ theme }) => theme.padding};
+        .city-header {
+          padding-right: 7vw;
+        }
+      }
+
+      .time {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2vh;
+      }
     }
   }
 
   .temp {
     font-size: clamp(14rem, 30vw, 30rem);
     text-align: center;
-    margin-top: 3vh;
+    /* margin-top: 3vh; */
   }
 
   .weather-bottom {
@@ -172,12 +178,25 @@ export const StyledWeatherDesktop = styled.div`
     z-index: 10;
     width: 100%;
 
-    .city-header{
-      display: flex;
-      align-items: center;
-      padding: 0.5em 1em 0.5em 1em;
+    .weather-main-info {
       border-radius: 1.8em;
-      border: 1px solid ${({ theme }) => theme.black};
+      background-color: ${({ theme }) => theme.black};
+      padding: 1.5em;
+      color: ${({ theme }) => theme.white};
+      .top {
+        display: flex;
+        justify-content: space-between;
+
+        .city-header {
+          padding-right: 7vw;
+        }
+      }
+
+      .time {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4vh;
+      }
     }
   }
 
@@ -222,7 +241,7 @@ export const StyledForecast = styled.div`
     }
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 550px) {
     div.forecast {
       margin: 0 1.5vw 0 0;
       padding: 1.5vw;
@@ -236,46 +255,52 @@ export const StyledForecast = styled.div`
 `;
 
 export const StyledBackButton = styled.a`
-  display: flex;
-  align-items: center;
-  padding: 0.5em;
-  color: black;
-  border-radius: 100%;
-  border: 1px solid black;
-
   .arrow {
     transform: scaleX(-1);
+    width: 1.75em;
+    fill: #ececec;
   }
 
-  &:hover {
-    background-color: #040403;
+  @media (min-width: 550px) {
     .arrow {
-      fill: white;
+      width: 2.5em;
     }
   }
 `;
 
 export const StyledDayTime = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 3vh;
+  /* background-color: ${({ theme }) => theme.black}; */
+  /* color: ${({ theme }) => theme.white}; */
+  /* border-radius: 2em;
+  border: 1px solid black; */
 
-  .info-item {
+  svg {
+    fill: ${({ theme }) => theme.white};
+  }
+  .info-container {
     display: flex;
-    align-items: center;
-    margin: 2vh 5vw 2vh 5vw;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2vh;
 
-    p {
-      margin-left: 3vw;
+    .info-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+
+      p {
+        margin-left: 1.5vw;
+      }
+    }
+    div.info-item:nth-child(1) {
+      margin-right: 4vw;
     }
   }
 
-  @media (min-width: 700px) {
-    flex-direction: column;
-    margin: 0;
-
-    .info-item {
-      margin: 3vh 0 0 0;
+  @media (max-width: 550px) {
+    .info-container {
+      margin-top: 1vh;
     }
   }
 `;

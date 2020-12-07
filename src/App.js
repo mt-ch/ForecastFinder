@@ -32,7 +32,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
 
   const { width } = useViewport();
-  const breakpoint = 700;
+  const breakpoint = 550;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -77,6 +77,7 @@ function App() {
                       weather={weather}
                       forecast={forecast}
                       location={location}
+                      setDisplay={setDisplay}
                     />
                   </>
                 )}

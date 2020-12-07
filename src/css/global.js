@@ -32,13 +32,11 @@ html, body {
   box-sizing: border-box;
 }
 
-h1{ font-size: clamp(7rem, 15vw, 12rem)}
-/* h2{ font-size:  clamp(1rem, 10vw, 13rem);}
-h3{ font-size:  clamp(1rem, 5vw, 4rem); font-weight: 500; color: black;} 
-h4{ font-size:  clamp(1.5rem, 3vw, 3rem); font-weight: 500; color: black;} 
-h5{ font-size:  clamp(1.5rem, 4vw, 4rem); font-weight: 500} */
+h1{ font-size: clamp(7rem, 12vw, 12rem)}
+h2{ font-size: clamp(2rem, 8vw, 6rem)}
+h3{ font-size: clamp(1.5rem, 5vw, 5rem)}
 p{ 
-    font-size: clamp(1rem, 1.75vw, 1.75rem);
+    font-size: clamp(.75rem, 2.25vw, 1.75rem);
     margin: 0;
 };
 

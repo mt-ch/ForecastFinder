@@ -1,6 +1,6 @@
 export default function createWeatherData(
     city,
-    timeZone,
+    date,
     weather,
     description,
     iconId,
@@ -13,7 +13,7 @@ export default function createWeatherData(
   ) {
     return {
       city,
-      timeZone,
+      date,
       weather,
       description,
       iconId,

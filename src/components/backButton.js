@@ -36,7 +36,7 @@ const BackButton = ({setDisplay}) => {
   };
   return (
     <StyledBackButton onClick={handleBack}>
-      <Arrow className="arrow" width="1.5em" />
+      <Arrow className="arrow" />
     </StyledBackButton>
   );
 };
