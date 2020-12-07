@@ -30,7 +30,7 @@ export default async function getWeather(location, setWeather, setHasError, setD
     setHasError(false);
     var cityWeather = [];
     const url =
-      "http://api.openweathermap.org/data/2.5/weather?q=" +
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
       location +
       "&appid=7de0445d2dc48c73e429027355084626";
     const response = await fetch(url);
