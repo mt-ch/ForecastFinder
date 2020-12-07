@@ -48,6 +48,7 @@ const Landing = ({
     const t1 = new TimelineLite();
     t1
       .from(".landing", {
+        delay: .5,
         duration: 0.1,
         y: "100vh",
         ease: Expo.easeInOut,
