@@ -4,7 +4,6 @@ import GetWeather from "../utils/getWeather";
 import WeatherCard from "./weatherCard";
 import WeatherCardDesktop from "./weatherCardDesktop";
 import Landing from "./landing";
-import styled from "styled-components";
 
 const useViewport = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -18,10 +17,6 @@ const useViewport = () => {
   // Return the width so we can use it in our components
   return { width };
 };
-function getCelsius(kelvins) {
-  var celsius = kelvins - 273.15;
-  return Math.round(celsius);
-}
 
 const Content = () => {
   const [location, setLocation] = useState("");

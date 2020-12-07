@@ -3,8 +3,9 @@ import DayTime from "./daytime";
 import BackButton from "./backButton";
 import Forecast from "./forecast";
 import { StyledWeatherDesktop, StyledCircle } from "../css/components.styled";
-import { TimelineLite, Expo } from "gsap";
+import { TimelineLite, Expo, gsap, CSSPlugin } from "gsap";
 import moment from "moment";
+gsap.registerPlugin(CSSPlugin);
 
 function getCelsius(kelvins) {
   var celsius = kelvins - 273.15;

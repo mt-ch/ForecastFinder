@@ -1,5 +1,6 @@
 import CreateWeatherData from "./createWeatherData";
-import { TimelineLite, Expo } from "gsap";
+import { TimelineLite, Expo, gsap, CSSPlugin } from "gsap";
+gsap.registerPlugin(CSSPlugin);
 
 export default async function getWeather(location, setWeather, setHasError, setDisplay) {
   const reveal = () => {

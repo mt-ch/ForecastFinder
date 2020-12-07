@@ -1,7 +1,9 @@
 import React from "react";
-import { TimelineLite, Expo } from "gsap";
+import { TimelineLite, Expo, gsap, CSSPlugin } from "gsap";
 import Arrow from "../icons/arrow";
 import { StyledBackButton } from "../css/components.styled";
+
+gsap.registerPlugin(CSSPlugin);
 
 const BackButton = ({setDisplay}) => {
   const handleBack = (evt) => {

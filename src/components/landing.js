@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Search from "../icons/search";
-import { TimelineLite, Expo } from "gsap";
+import { TimelineLite, Expo, gsap, CSSPlugin } from "gsap";
 import { StyledLanding } from "../css/components.styled";
+gsap.registerPlugin(CSSPlugin);
 
 const cities = [
   { name: "Paris" },

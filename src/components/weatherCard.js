@@ -4,8 +4,9 @@ import BackButton from "./backButton";
 import Forecast from "./forecast";
 import DayTime from "./daytime";
 import { useEffect } from "react";
-import { TimelineLite, Expo } from "gsap";
+import { TimelineLite, Expo, CSSPlugin, gsap } from "gsap";
 import moment from "moment";
+gsap.registerPlugin(CSSPlugin);
 
 function getCelsius(kelvins) {
   var celsius = kelvins - 273.15;
